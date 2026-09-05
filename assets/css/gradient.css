@@ -1,0 +1,48 @@
+@import url("https://fonts.googleapis.com/css?family=Montserrat:400,700");
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #131217;
+}
+
+
+
+#gradient {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1;
+    pointer-events: none;
+    width: 600px;
+    height: 600px;
+    margin-top: -300px;
+    margin-left: -300px;
+    border-radius: 50%;
+    background: radial-gradient(circle, #dd2d4a55 0%, transparent 70%);
+    filter: blur(40px);
+    mix-blend-mode: screen;
+}
+
+#Navbar {
+    position: fixed;
+    z-index: 1000;
+}
+
+.navbar-menu-center {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+@media (min-width: 992px) {
+    .navbar-menu-center {
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        margin: 0;
+    }
+}
