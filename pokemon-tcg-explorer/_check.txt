@@ -1,6 +1,0 @@
-FAIL https://images.pokemontcg.io/sv3/199.png O tempo limite da operação foi atingido.
-FAIL https://images.pokemontcg.io/swsh45sv/SV107.png O tempo limite da operação foi atingido.
-FAIL https://images.pokemontcg.io/swshcp/79.png O tempo limite da operação foi atingido.
-FAIL https://images.pokemontcg.io/sv151/199.png O tempo limite da operação foi atingido.
-FAIL https://images.pokemontcg.io/base1/4.png O tempo limite da operação foi atingido.
-FAIL https://images.pokemontcg.io/neo4/107.png O tempo limite da operação foi atingido.
