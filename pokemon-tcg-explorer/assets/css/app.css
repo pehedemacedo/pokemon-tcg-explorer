@@ -1,0 +1,891 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap");
+
+/* =========================================================
+   TCG Explorer — estilo do aplicativo (página inicial e Explorar)
+   Paleta alinhada ao brilho vermelho do gradient.css (#dd2d4a).
+   Navbar e fundo com gradiente continuam os mesmos.
+   ========================================================= */
+
+:root {
+    color-scheme: dark;
+    --bg: #131217;
+    --surface: #1a1922;
+    --surface-2: #22202c;
+    --border: #2d2b3a;
+    --text: #f3f2f7;
+    --text-muted: #a29fb3;
+    --accent: #e5484d;
+    --accent-strong: #ff5c61;
+    --gold: #f5b942;
+}
+
+[hidden] {
+    display: none !important;
+}
+
+body {
+    padding-top: 84px;
+    font-family: "Montserrat", sans-serif;
+    background-color: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+}
+
+.app {
+    position: relative;
+    z-index: 2;
+    max-width: 1440px;
+    margin: 0 auto;
+    padding: 28px 40px 80px;
+}
+
+/* ---------- Hero (título + busca) ---------- */
+
+.hero {
+    display: grid;
+    grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr);
+    gap: 36px;
+    align-items: center;
+    margin-bottom: 26px;
+}
+
+.hero-text h1 {
+    font-size: clamp(1.9rem, 3.4vw, 2.7rem);
+    font-weight: 800;
+    line-height: 1.18;
+    text-align: left;
+    color: var(--text);
+}
+
+.text-accent {
+    color: var(--accent);
+}
+
+.hero-subtitle {
+    margin-top: 14px;
+    max-width: 430px;
+    color: var(--text-muted);
+    font-size: 1rem;
+    line-height: 1.55;
+}
+
+.search-bar {
+    display: flex;
+    gap: 10px;
+}
+
+.search-field {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    height: 52px;
+    padding: 0 16px;
+    background-color: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+}
+
+.search-icon {
+    color: #6b6880;
+    flex-shrink: 0;
+}
+
+.search-field input {
+    flex: 1;
+    min-width: 0;
+    border: none;
+    outline: none;
+    background: transparent;
+    color: #191822;
+    font-family: inherit;
+    font-size: 1rem;
+}
+
+.search-field input::placeholder {
+    color: #8a879c;
+}
+
+.btn-search {
+    height: 52px;
+    padding: 0 30px;
+    border: none;
+    border-radius: 12px;
+    background-color: var(--accent);
+    color: #ffffff;
+    font-family: inherit;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.15s ease, transform 0.15s ease;
+}
+
+.btn-search:hover {
+    background-color: var(--accent-strong);
+}
+
+.btn-search:active {
+    transform: scale(0.98);
+}
+
+.search-examples {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 6px 14px;
+    margin-top: 14px;
+    color: var(--text-muted);
+    font-size: 0.9rem;
+}
+
+.example-link {
+    border: none;
+    background: none;
+    padding: 0;
+    color: var(--accent-strong);
+    font-family: inherit;
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.example-link:hover {
+    text-decoration: underline;
+}
+
+.hero-search-only {
+    grid-template-columns: 1fr;
+    margin-bottom: 30px;
+}
+
+.hero-search-only .hero-search {
+    width: 100%;
+}
+
+.hero-search-only .search-bar {
+    max-width: 760px;
+}
+
+/* ---------- Painel de filtros ---------- */
+
+.filters-panel {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-end;
+    gap: 16px;
+    padding: 16px 20px;
+    margin-bottom: 26px;
+    background-color: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+}
+
+.filter-group {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    min-width: 175px;
+}
+
+.filter-group-grow {
+    flex: 1;
+    min-width: 200px;
+}
+
+.filter-group label {
+    font-size: 0.78rem;
+    font-weight: 600;
+    color: var(--text-muted);
+}
+
+.filter-select {
+    height: 42px;
+    padding: 0 12px;
+    background-color: var(--surface-2);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    color: var(--text);
+    font-family: inherit;
+    font-size: 0.9rem;
+    cursor: pointer;
+}
+
+.filter-select:hover {
+    border-color: #3d3b4d;
+}
+
+.filter-select:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 1px;
+}
+
+.btn-clear {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    height: 42px;
+    margin-left: auto;
+    padding: 0 18px;
+    background-color: transparent;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    color: var(--text);
+    font-family: inherit;
+    font-size: 0.9rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: border-color 0.15s ease, color 0.15s ease;
+}
+
+.btn-clear:hover {
+    border-color: var(--accent);
+    color: var(--accent-strong);
+}
+
+/* ---------- Resultados ---------- */
+
+.results-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 380px;
+    gap: 28px;
+    align-items: start;
+}
+
+.results-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    margin-bottom: 18px;
+}
+
+.results-count {
+    color: var(--text-muted);
+    font-size: 0.95rem;
+}
+
+#results-count {
+    color: var(--accent-strong);
+    font-weight: 700;
+}
+
+.view-toggle {
+    display: flex;
+    gap: 4px;
+    padding: 4px;
+    background-color: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+}
+
+.view-btn {
+    display: grid;
+    place-items: center;
+    width: 38px;
+    height: 32px;
+    border: none;
+    border-radius: 8px;
+    background: transparent;
+    color: var(--text-muted);
+    cursor: pointer;
+}
+
+.view-btn:hover {
+    color: var(--text);
+}
+
+.view-btn.active {
+    background-color: var(--accent);
+    color: #ffffff;
+}
+
+/* ---------- Grade de cartas ---------- */
+
+.cards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(195px, 1fr));
+    gap: 18px;
+}
+
+.card-item {
+    padding: 12px;
+    background-color: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    cursor: pointer;
+    transition: transform 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.card-item:hover {
+    transform: translateY(-4px);
+    border-color: #3d3b4d;
+}
+
+.card-item.selected {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 1px var(--accent), 0 10px 34px rgba(229, 72, 77, 0.22);
+}
+
+.card-image {
+    display: block;
+    width: 100%;
+    aspect-ratio: 245 / 342;
+    object-fit: contain;
+    border-radius: 8px;
+}
+
+.card-name {
+    margin-top: 12px;
+    font-size: 0.98rem;
+    font-weight: 700;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.card-set {
+    margin-top: 3px;
+    font-size: 0.78rem;
+    color: var(--text-muted);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.card-meta {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    margin-top: 10px;
+}
+
+.card-price {
+    color: var(--gold);
+    font-size: 0.8rem;
+    font-weight: 700;
+    white-space: nowrap;
+}
+
+/* ---------- Visualização em lista ---------- */
+
+.cards-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.card-row {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    width: 100%;
+    padding: 10px 14px;
+    text-align: left;
+    background-color: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    color: var(--text);
+    font-family: inherit;
+    cursor: pointer;
+    transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.card-row:hover {
+    border-color: #3d3b4d;
+}
+
+.card-row.selected {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 1px var(--accent), 0 8px 28px rgba(229, 72, 77, 0.2);
+}
+
+.card-row-image {
+    width: 44px;
+    height: 62px;
+    object-fit: contain;
+    border-radius: 4px;
+}
+
+.card-row-main {
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.card-row-name {
+    font-weight: 700;
+    font-size: 0.95rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.card-row-set {
+    font-size: 0.78rem;
+    color: var(--text-muted);
+}
+
+.card-row-chevron {
+    color: var(--text-muted);
+    font-size: 1.2rem;
+}
+
+/* ---------- Etiquetas de raridade ---------- */
+
+.rarity-pill {
+    display: inline-block;
+    padding: 4px 10px;
+    border-radius: 999px;
+    border: 1px solid;
+    font-size: 0.68rem;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+.rarity-common {
+    color: #9fd6a8;
+    border-color: #37513c;
+    background-color: rgba(94, 194, 106, 0.12);
+}
+
+.rarity-uncommon {
+    color: #8fd0d8;
+    border-color: #2f5257;
+    background-color: rgba(74, 168, 255, 0.12);
+}
+
+.rarity-rare {
+    color: #93b4ff;
+    border-color: #34437a;
+    background-color: rgba(96, 132, 255, 0.14);
+}
+
+.rarity-holo {
+    color: #d3a5f5;
+    border-color: #5b3a78;
+    background-color: rgba(182, 120, 240, 0.14);
+}
+
+.rarity-ultra {
+    color: var(--gold);
+    border-color: #6e5423;
+    background-color: rgba(245, 185, 66, 0.12);
+}
+
+.rarity-illustration {
+    color: #ffa7b4;
+    border-color: #7a3440;
+    background-color: rgba(229, 72, 77, 0.14);
+}
+
+/* ---------- Painel de detalhes ---------- */
+
+.detail-panel {
+    position: sticky;
+    top: 92px;
+    max-height: calc(100vh - 112px);
+    overflow-y: auto;
+    padding: 22px;
+    background-color: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 18px;
+}
+
+.detail-panel::-webkit-scrollbar {
+    width: 8px;
+}
+
+.detail-panel::-webkit-scrollbar-thumb {
+    background-color: var(--border);
+    border-radius: 8px;
+}
+
+.detail-empty {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 14px;
+    padding: 48px 10px;
+    text-align: center;
+    color: var(--text-muted);
+}
+
+.detail-empty h3 {
+    color: var(--text);
+    font-size: 1.05rem;
+}
+
+.detail-empty p {
+    font-size: 0.85rem;
+    line-height: 1.5;
+}
+
+.pokeball-placeholder {
+    width: 58px;
+    height: 58px;
+    border-radius: 50%;
+    background: linear-gradient(180deg, var(--accent) 0 46%, #14131a 46% 54%, #f3f2f7 54% 100%);
+    border: 3px solid #14131a;
+    position: relative;
+    box-shadow: 0 10px 26px rgba(0, 0, 0, 0.4);
+}
+
+.pokeball-placeholder::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background-color: #f3f2f7;
+    border: 3px solid #14131a;
+    transform: translate(-50%, -50%);
+}
+
+.detail-image-wrap {
+    display: grid;
+    place-items: center;
+    padding: 6px 0 2px;
+}
+
+.detail-image {
+    width: 100%;
+    max-width: 270px;
+    border-radius: 12px;
+    box-shadow: 0 18px 44px rgba(0, 0, 0, 0.5);
+}
+
+.detail-title-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    margin-top: 16px;
+}
+
+.detail-name {
+    font-size: 1.25rem;
+    font-weight: 800;
+}
+
+.detail-icon-actions {
+    display: flex;
+    gap: 8px;
+}
+
+.icon-btn {
+    display: grid;
+    place-items: center;
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    background-color: var(--surface-2);
+    border: 1px solid var(--border);
+    color: var(--text-muted);
+    cursor: pointer;
+    transition: color 0.15s ease, border-color 0.15s ease, transform 0.1s ease;
+}
+
+.icon-btn:hover {
+    color: var(--text);
+    border-color: #3d3b4d;
+}
+
+.icon-btn:active {
+    transform: scale(0.92);
+}
+
+.icon-btn.active-star {
+    color: var(--gold);
+}
+
+.icon-btn.active-star svg {
+    fill: currentColor;
+}
+
+.icon-btn.active-heart {
+    color: var(--accent-strong);
+}
+
+.icon-btn.active-heart svg {
+    fill: currentColor;
+}
+
+.detail-meta {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px;
+    margin: 10px 0 16px;
+    color: var(--text-muted);
+    font-size: 0.85rem;
+}
+
+.detail-info {
+    display: grid;
+    grid-template-columns: 110px minmax(0, 1fr);
+    row-gap: 9px;
+    column-gap: 10px;
+    font-size: 0.85rem;
+}
+
+.detail-info dt {
+    color: var(--text-muted);
+}
+
+.detail-info dd {
+    font-weight: 600;
+    overflow-wrap: anywhere;
+}
+
+.types-wrap {
+    display: inline-flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 5px;
+}
+
+.type-label {
+    margin-right: 6px;
+}
+
+.energy {
+    display: inline-grid;
+    place-items: center;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    color: #14131a;
+    font-size: 0.6rem;
+    font-weight: 800;
+}
+
+.section-title {
+    margin: 20px 0 10px;
+    font-size: 0.95rem;
+    font-weight: 800;
+}
+
+.attack-card {
+    padding: 12px 14px;
+    margin-bottom: 10px;
+    background-color: var(--surface-2);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+}
+
+.attack-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+.attack-name {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 6px;
+    font-weight: 700;
+    font-size: 0.9rem;
+}
+
+.attack-damage {
+    font-weight: 700;
+    font-size: 0.9rem;
+}
+
+.attack-text {
+    margin-top: 7px;
+    color: var(--text-muted);
+    font-size: 0.8rem;
+    line-height: 1.5;
+}
+
+.prices {
+    padding: 4px 14px;
+    background-color: var(--surface-2);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+}
+
+.price-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    padding: 9px 0;
+    font-size: 0.85rem;
+}
+
+.price-row + .price-row {
+    border-top: 1px dashed var(--border);
+}
+
+.price-label {
+    color: var(--text-muted);
+}
+
+.price-value {
+    color: var(--gold);
+    font-weight: 700;
+}
+
+.price-empty {
+    padding: 10px 0;
+    color: var(--text-muted);
+    font-size: 0.8rem;
+}
+
+.detail-actions {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-top: 18px;
+}
+
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    height: 44px;
+    padding: 0 14px;
+    border-radius: 10px;
+    font-family: inherit;
+    font-size: 0.85rem;
+    font-weight: 700;
+    text-decoration: none;
+    cursor: pointer;
+    transition: filter 0.15s ease, border-color 0.15s ease;
+}
+
+.btn-collection {
+    border: none;
+    background-color: var(--accent);
+    color: #ffffff;
+}
+
+.btn-collection:hover {
+    filter: brightness(1.1);
+}
+
+.btn-collection.in-collection {
+    background-color: #2f6b3c;
+}
+
+.btn-pokedex {
+    background-color: var(--surface-2);
+    border: 1px solid var(--border);
+    color: var(--text);
+}
+
+.btn-pokedex:hover {
+    border-color: #4a4860;
+}
+
+/* ---------- Estados (vazio / carregando / erro) ---------- */
+
+.state-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    padding: 70px 20px;
+    text-align: center;
+    color: var(--text-muted);
+    background-color: var(--surface);
+    border: 1px dashed var(--border);
+    border-radius: 16px;
+}
+
+.state-box h3 {
+    color: var(--text);
+    font-size: 1.15rem;
+}
+
+.state-box p {
+    max-width: 460px;
+    font-size: 0.9rem;
+    line-height: 1.6;
+}
+
+.state-error h3 {
+    color: var(--accent-strong);
+}
+
+.spinner {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    border: 3px solid var(--border);
+    border-top-color: var(--accent);
+    animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* ---------- Responsivo ---------- */
+
+@media (max-width: 1100px) {
+    .results-layout {
+        grid-template-columns: 1fr;
+    }
+
+    .detail-panel {
+        position: static;
+        max-height: none;
+    }
+}
+
+@media (max-width: 900px) {
+    .hero {
+        grid-template-columns: 1fr;
+        gap: 22px;
+    }
+
+    .app {
+        padding: 20px 22px 60px;
+    }
+}
+
+@media (max-width: 620px) {
+    .search-bar {
+        flex-direction: column;
+    }
+
+    .btn-search {
+        width: 100%;
+    }
+
+    .filters-panel {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .filter-group {
+        min-width: 0;
+    }
+
+    .btn-clear {
+        margin-left: 0;
+        justify-content: center;
+    }
+
+    .detail-actions {
+        grid-template-columns: 1fr;
+    }
+}
+
+:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+}

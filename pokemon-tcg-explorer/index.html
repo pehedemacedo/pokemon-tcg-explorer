@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TCG Explorer</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <link rel="stylesheet" href="assets/css/app.css">
+    <link rel="stylesheet" href="assets/css/gradient.css">
+</head>
+
+<body>
+
+    <div id="Navbar"></div>
+    <script src="assets/js/navbar.js"></script>
+
+    <main class="app">
+        <!-- Hero: título + busca -->
+        <section class="hero">
+            <div class="hero-text">
+                <h1>Explore o mundo do<br>Pokémon <span class="text-accent">TCG!</span></h1>
+                <p class="hero-subtitle">Pesquise por cartas, descubra ataques, habilidades e muito mais.</p>
+            </div>
+            <div class="hero-search">
+                <form id="search-form" class="search-bar" autocomplete="off">
+                    <div class="search-field">
+                        <svg class="search-icon" viewBox="0 0 24 24" width="18" height="18" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+                            <circle cx="11" cy="11" r="7" />
+                            <path d="m21 21-4.35-4.35" />
+                        </svg>
+                        <input id="search-input" type="text" placeholder="Charizard"
+                            aria-label="Buscar cartas pelo nome">
+                    </div>
+                    <button type="submit" class="btn-search">Buscar</button>
+                </form>
+                <div class="search-examples" id="search-examples">
+                    <span>Exemplos:</span>
+                    <button type="button" class="example-link" data-query="Pikachu">Pikachu</button>
+                    <button type="button" class="example-link" data-query="Charizard">Charizard</button>
+                    <button type="button" class="example-link" data-query="Mewtwo">Mewtwo</button>
+                    <button type="button" class="example-link" data-query="Gardevoir">Gardevoir</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Filtros -->
+        <section class="filters-panel" aria-label="Filtros de busca">
+            <div class="filter-group">
+                <label for="filter-type">Tipo</label>
+                <select id="filter-type" class="filter-select">
+                    <option value="">Todos</option>
+                    <option value="Colorless">Incolor</option>
+                    <option value="Darkness">Trevas</option>
+                    <option value="Dragon">Dragão</option>
+                    <option value="Fairy">Fada</option>
+                    <option value="Fighting">Lutador</option>
+                    <option value="Fire">Fogo</option>
+                    <option value="Grass">Planta</option>
+                    <option value="Lightning">Elétrico</option>
+                    <option value="Metal">Metal</option>
+                    <option value="Psychic">Psíquico</option>
+                    <option value="Water">Água</option>
+                </select>
+            </div>
+            <div class="filter-group">
+                <label for="filter-rarity">Raridade</label>
+                <select id="filter-rarity" class="filter-select">
+                    <option value="">Todas</option>
+                    <option value="Common">Comum</option>
+                    <option value="Uncommon">Incomum</option>
+                    <option value="Rare">Rara</option>
+                    <option value="Rare Holo">Rara Holo</option>
+                    <option value="Rare Holo EX">Rara Holo EX</option>
+                    <option value="Rare Ultra">Rara Ultra</option>
+                    <option value="Rare Secret">Rara Secreta</option>
+                    <option value="Illustration Rare">Rara Ilustrada</option>
+                    <option value="Special Illustration Rare">Rara Ilustrada Especial</option>
+                    <option value="Hyper Rare">Hiper Rara</option>
+                    <option value="Promo">Promo</option>
+                </select>
+            </div>
+            <div class="filter-group filter-group-grow">
+                <label for="filter-set">Set</label>
+                <select id="filter-set" class="filter-select">
+                    <option value="">Todos</option>
+                </select>
+            </div>
+            <div class="filter-group">
+                <label for="filter-sort">Ordenar por</label>
+                <select id="filter-sort" class="filter-select">
+                    <option value="recent">Mais recentes</option>
+                    <option value="oldest">Mais antigos</option>
+                    <option value="name">Nome (A-Z)</option>
+                    <option value="price-desc">Maior preço</option>
+                    <option value="price-asc">Menor preço</option>
+                </select>
+            </div>
+            <button type="button" id="clear-filters" class="btn-clear">
+                <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <path d="M3 12a9 9 0 0 1 15-6.7L21 8" />
+                    <path d="M21 3v5h-5" />
+                    <path d="M21 12a9 9 0 0 1-15 6.7L3 16" />
+                    <path d="M3 21v-5h5" />
+                </svg>
+                Limpar filtros
+            </button>
+        </section>
+
+
+        <!-- Resultados + painel de detalhes -->
+        <section class="results-layout">
+            <div class="results-main">
+                <div class="results-header" id="results-header" hidden>
+                    <p class="results-count">Resultados encontrados: <span id="results-count"></span></p>
+                    <div class="view-toggle" role="group" aria-label="Modo de visualização">
+                        <button type="button" class="view-btn active" id="view-grid" title="Visualização em grade"
+                            aria-pressed="true">
+                            <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor" aria-hidden="true">
+                                <rect x="3" y="3" width="7" height="7" rx="1" />
+                                <rect x="14" y="3" width="7" height="7" rx="1" />
+                                <rect x="3" y="14" width="7" height="7" rx="1" />
+                                <rect x="14" y="14" width="7" height="7" rx="1" />
+                            </svg>
+                        </button>
+                        <button type="button" class="view-btn" id="view-list" title="Visualização em lista"
+                            aria-pressed="false">
+                            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor"
+                                stroke-width="2" stroke-linecap="round" aria-hidden="true">
+                                <path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01" />
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+
+                <div id="results-state" class="state-box">
+                    <div class="pokeball-placeholder"></div>
+                    <h3>Encontre suas cartas favoritas</h3>
+                    <p>Digite o nome de uma carta e clique em <strong>Buscar</strong>, ou use um dos exemplos acima.
+                        Você verá foto, preços e detalhes de cada carta.</p>
+                </div>
+                <div id="cards-grid" class="cards-grid" hidden></div>
+                <div id="cards-list" class="cards-list" hidden></div>
+            </div>
+
+            <aside class="detail-panel" id="detail-panel" aria-label="Detalhes da carta">
+                <div class="detail-empty" id="detail-empty">
+                    <div class="pokeball-placeholder"></div>
+                    <h3>Detalhes da carta</h3>
+                    <p>Selecione uma carta na grade para ver a foto em alta resolução, preços, ataques e mais.</p>
+                </div>
+                <div id="detail-content" hidden></div>
+            </aside>
+        </section>
+
+
+    </main>
+
+    <div id="gradient"></div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+        crossorigin="anonymous"></script>
+    <script src="assets/js/pokemon-api.js"></script>
+    <script src="assets/js/explorer.js"></script>
+    <script src="assets/js/gradient.js"></script>
+</body>
+
+</html>
